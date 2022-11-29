@@ -6,13 +6,13 @@ type FtdModel interface {
 }
 
 type SecurityZone struct {
-	ID          string `json:"id,omitempty"`
-	Version     string `json:"version,omitempty"`
-	Name        string `json:"name"`
-	Description string `json:"description,omitempty"`
-	//Interfaces
-	Mode string `json:"mode"`
-	Type string `json:"type"` //securityzone
+	ID          string           `json:"id,omitempty"`
+	Version     string           `json:"version,omitempty"`
+	Name        string           `json:"name"`
+	Description string           `json:"description,omitempty"`
+	Interfaces  []ReferenceModel `json:"interfaces,omitempty"`
+	Mode        string           `json:"mode"`
+	Type        string           `json:"type"` //securityzone
 	//links
 }
 
@@ -24,8 +24,8 @@ type NetworkObject struct {
 	SubType     string `json:"subType"` //HOST NETWORK FQDN RANGE
 	Value       string `json:"value"`
 	//isSystemDefined - bool
-	//dnsResolution - string
-	Type string `json:"type"` //networkobject
+	DnsResolution string `json:"dnsResolution,omitempty"` //['IPV4_ONLY', 'IPV6_ONLY', 'IPV4_AND_IPV6']
+	Type          string `json:"type"`                    //networkobject
 }
 
 type ReferenceModel struct {
@@ -35,12 +35,12 @@ type ReferenceModel struct {
 	Type    string `json:"type"`
 }
 
-//Access policy wraper
+// Access policy wraper
 type AccessPolicyItems struct {
 	Items []AccessPolicy `json:"items"`
 }
 
-//add all fields later
+// add all fields later
 type AccessPolicy struct {
 	ID      string `json:"id"`
 	Version string `json:"version,omitempty"`
