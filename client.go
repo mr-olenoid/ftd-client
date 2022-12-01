@@ -104,7 +104,8 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	return body, err
 }
 
-func doFTDRequest[T FtdModel](m *T, name string, method string, c *Client) error {
+// func doFTDRequest[T FtdModel](m *T, name string, method string, c *Client) error {
+func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	URL := fmt.Sprintf("%s/api/fdm/v6/%s", c.FTDURL, name)
 	fmt.Printf("Method: %s %s \n", method, URL)
 	rb, err := json.Marshal(m)
