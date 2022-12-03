@@ -21,8 +21,6 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 				secz.Name = sz.Name
 				secz.Type = sz.Type
 				secz.Version = sz.Version
-				// found security zone for this interface
-				//fmt.Println(secz)
 			}
 		}
 	}
@@ -30,24 +28,25 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 }
 
 // CreateNetworkInterface - return interface and security zone assosiated with it
-func (c *Client) CreateNetworkInterface(name string, securityZone *ReferenceModel) (*NetworkInterface, *ReferenceModel, error) {
+func (c *Client) CreateNetworkInterface(name string) (*NetworkInterface, error) {
 	i := Items[NetworkInterface]{}
-	sz := &ReferenceModel{}
+	//sz := &ReferenceModel{}
 	err := doFTDRequest(&i, fmt.Sprintf("/devices/default/interfaces?filter=name:%s", name), "GET", c)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	iface := i.Items[0]
-
-	if securityZone.ID == "" {
-		sz, err = c.GetNetworkInterfaceSecurityZone(iface.ID)
-		if err != nil {
-			return nil, nil, err
+	/*
+		if securityZone.ID == "" {
+			sz, err = c.GetNetworkInterfaceSecurityZone(iface.ID)
+			if err != nil {
+				return nil, nil, err
+			}
+			fmt.Println(securityZone)
 		}
-		fmt.Println(securityZone)
-	}
-	return &iface, sz, err
+	*/
+	return &iface, err
 }
 
 func (c *Client) UpdateNetworkInterface(hardwareName string, securityZone ReferenceModel) (*NetworkInterface, error) {
