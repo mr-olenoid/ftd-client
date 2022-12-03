@@ -28,23 +28,24 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 	return &secz, nil
 }
 
-func (c *Client) CreateNetworkInterface(name string, securityZone *ReferenceModel) (*Items[NetworkInterface], *ReferenceModel, error) {
+func (c *Client) CreateNetworkInterface(name string, securityZone *ReferenceModel) (*NetworkInterface, *ReferenceModel, error) {
 	i := Items[NetworkInterface]{}
 	sz := &ReferenceModel{}
 	err := doFTDRequest(&i, fmt.Sprintf("/devices/default/interfaces?filter=name:%s", name), "GET", c)
 	if err != nil {
 		return nil, nil, err
 	}
-	//fmt.Println(i.Items)
+
+	iface := i.Items[0]
 
 	if securityZone.ID == "" {
-		sz, err = c.GetNetworkInterfaceSecurityZone(i.Items[0].ID)
+		sz, err = c.GetNetworkInterfaceSecurityZone(iface.ID)
 		if err != nil {
 			return nil, nil, err
 		}
 		fmt.Println(securityZone)
 	}
-	return &i, sz, err
+	return &iface, sz, err
 }
 
 func (c *Client) UpdateNetworkInterface(hardwareName string, securityZone ReferenceModel) (*NetworkInterface, error) {
