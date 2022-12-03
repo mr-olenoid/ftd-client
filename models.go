@@ -75,7 +75,7 @@ type NetworkInterface struct {
 	//ipv6
 	ManagementOnly      bool   `json:"managementOnly,omitempty"`
 	ManagementInterface bool   `json:"managementInterface,omitempty"`
-	Mode                string `json:"mode,omitempty"`
+	Mode                string `json:"mode,omitempty"` //['PASSIVE', 'ROUTED', 'SWITCHPORT', 'BRIDGEGROUPMEMBER']
 	Mtu                 int    `json:"mtu,omitempty"`
 	Enabled             bool   `json:"enabled,omitempty"`
 	MacAddress          string `json:"macAddress,omitempty"`
@@ -93,7 +93,7 @@ type NetworkInterface struct {
 	SplitInterface      bool   `json:"splitInterface,omitempty"`
 	TenGigabitInterface bool   `json:"tenGigabitInterface,omitempty"`
 	GigabitInterface    bool   `json:"gigabitInterface,omitempty"`
-	Type                string `json:"type"` //accessrule
+	Type                string `json:"type"` //physicalinterface
 
 }
 
