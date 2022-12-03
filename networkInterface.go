@@ -20,6 +20,7 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 				secz.ID = sz.ID
 				secz.Name = sz.Name
 				secz.Type = sz.Type
+				secz.Version = sz.Version
 				// found security zone for this interface
 				//fmt.Println(secz)
 			}
@@ -28,6 +29,7 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 	return &secz, nil
 }
 
+// CreateNetworkInterface - return interface and security zone assosiated with it
 func (c *Client) CreateNetworkInterface(name string, securityZone *ReferenceModel) (*NetworkInterface, *ReferenceModel, error) {
 	i := Items[NetworkInterface]{}
 	sz := &ReferenceModel{}
