@@ -49,10 +49,9 @@ func (c *Client) CreateNetworkInterface(name string) (*NetworkInterface, error) 
 	return &iface, err
 }
 
-func (c *Client) UpdateNetworkInterface(hardwareName string, securityZone ReferenceModel) (*NetworkInterface, error) {
-	i := NetworkInterface{}
+func (c *Client) UpdateNetworkInterface(n NetworkInterface) (*NetworkInterface, error) {
 
-	err := doFTDRequest(&i, fmt.Sprintf("/devices/default/interfaces?filter=name:%s", hardwareName), "PUT", c)
+	err := doFTDRequest(&n, fmt.Sprintf("/devices/default/interfaces/%s", n.ID), "PUT", c)
 
-	return &i, err
+	return &n, err
 }
