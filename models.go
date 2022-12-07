@@ -51,17 +51,84 @@ type AccessPolicy struct {
 }
 
 type AccessRule struct {
-	ID               string           `json:"id,omitempty"`
-	RuleID           int              `json:"ruleId,omitempty"`
-	Version          string           `json:"version,omitempty"`
-	Name             string           `json:"name"`
-	Description      string           `json:"description,omitempty"`
-	SourceZones      []ReferenceModel `json:"sourceZones,omitempty"`
-	DestinationZones []ReferenceModel `json:"destinationZones,omitempty"`
+	ID                        string             `json:"id,omitempty"`
+	RuleID                    int                `json:"ruleId,omitempty"`
+	Version                   string             `json:"version,omitempty"`
+	Name                      string             `json:"name"`
+	Description               string             `json:"description,omitempty"`
+	SourceZones               []ReferenceModel   `json:"sourceZones,omitempty"`
+	DestinationZones          []ReferenceModel   `json:"destinationZones,omitempty"`
+	SourceNetworks            []ReferenceModel   `json:"sourceNetworks,omitempty"`
+	DestinationNetworks       []ReferenceModel   `json:"destinationNetworks,omitempty"`
+	SourcePorts               []ReferenceModel   `json:"sourcePorts,omitempty"`
+	DestinationPorts          []ReferenceModel   `json:"destinationPorts,omitempty"`
+	RulePosition              int                `json:"rulePosition,omitempty"`
+	RuleAction                string             `json:"ruleAction"`
+	EventLogAction            string             `json:"eventLogAction,omitempty"` //['LOG_FLOW_START', 'LOG_FLOW_END', 'LOG_BOTH', 'LOG_NONE']
+	IdentitySources           []ReferenceModel   `json:"identitySources,omitempty"`
+	Users                     []TrafficEntry     `json:"users,omitempty"`
+	EmbeddedAppFilter         *EmbeddedAppFilter `json:"embeddedAppFilter,omitempty"`
+	UrlFilter                 *EmbeddedURLFilter `json:"urlFilter,omitempty"`
+	IntrusionPolicy           *ReferenceModel    `json:"intrusionPolicy,omitempty"`
+	FilePolicy                *ReferenceModel    `json:"filePolicy,omitempty"`
+	LogFiles                  bool               `json:"logFiles,omitempty"`
+	SyslogServer              *ReferenceModel    `json:"syslogServer,omitempty"`
+	HitCount                  bool               `json:"hitCount,omitempty"`
+	DestinationDynamicObjects []ReferenceModel   `json:"destinationDynamicObjects,omitempty"`
+	SourceDynamicObjects      []ReferenceModel   `json:"sourceDynamicObjects,omitempty"`
+	TimeRangeObjects          []ReferenceModel   `json:"timeRangeObjects,omitempty"`
+	Type                      string             `json:"type"` //accessrule
+}
 
-	RuleAction string `json:"ruleAction"`
+type TrafficEntry struct {
+	Name           string         `json:"name"`
+	IdentitySource ReferenceModel `json:"identitySource"`
+	Type           string         `json:"type"` //trafficentry
+}
 
-	Type string `json:"type"` //accessrule
+type EmbeddedAppFilter struct {
+	Applications       []ReferenceModel             `json:"applications,omitempty"`
+	ApplicationFilters []ReferenceModel             `json:"applicationFilters,omitempty"`
+	Conditions         []ApplicationFilterCondition `json:"ApplicationFilterCondition,omitempty"`
+	Type               string                       `json:"type"` //embeddedappfilter
+}
+
+type EmbeddedURLFilter struct {
+	UrlObjects    []ReferenceModel     `json:"urlObjects,omitempty"`
+	UrlCategories []URLCategoryMatcher `json:"urlCategories,omitempty"`
+	Type          string               `json:"type"` //embeddedurlfilter
+}
+
+type URLCategoryMatcher struct {
+	UrlCategory                 ReferenceModel `json:"urlCategory"`
+	UrlReputation               ReferenceModel `json:"urlReputation"`
+	IncludeUnknownUrlReputation bool           `json:"includeUnknownUrlReputation,omitempty"`
+	Type                        string         `json:"type"` //urlcategorymatcher
+}
+
+type ApplicationFilterCondition struct {
+	Risks            []RiskCondition         `json:"risks,omitempty"`
+	Productivities   []ProductivityCondition `json:"productivities,omitempty"`
+	Tags             []ReferenceModel        `json:"tags,omitempty"`
+	Categories       []ReferenceModel        `json:"categories,omitempty"`
+	Filter           string                  `json:"filter,omitempty"`
+	ApplicationTypes []TypeCondition         `json:"applicationTypes,omitempty"`
+	Type             string                  `json:"type"` //applicationfiltercondition
+}
+
+type RiskCondition struct {
+	Risk string `json:"risk,omitempty"` // ['UNKNOWN', 'VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL'],
+	Type string `json:"type"`           //riskcondition
+}
+
+type ProductivityCondition struct {
+	Productivity string `json:"productivity,omitempty"`
+	Type         string `json:"type"` //productivitycondition
+}
+
+type TypeCondition struct {
+	ApplicationType string `json:"applicationType,omitempty"`
+	Type            string `json:"type"` //typecondition
 }
 
 type NetworkInterface struct {

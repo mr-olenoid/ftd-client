@@ -2,27 +2,27 @@ package ftdClient
 
 import "fmt"
 
-func (c *Client) GetAccessRule(ID string) (*AccessRule, error) {
+func (c *Client) GetAccessRule(apId string, ID string) (*AccessRule, error) {
 	ar := AccessRule{}
 	ar.Type = "accessrule"
-	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s", ID), "GET", c)
+	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s/accessrules/%s", apId, ID), "GET", c)
 	return &ar, err
 }
 
-func (c *Client) CreateAccessRule(ar AccessRule) (*AccessRule, error) {
+func (c *Client) CreateAccessRule(apId string, ar AccessRule) (*AccessRule, error) {
 	ar.Type = "accessrule"
-	err := doFTDRequest(&ar, "policy/accesspolicies", "POST", c)
+	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s/accessrules", apId), "POST", c)
 	return &ar, err
 }
 
-func (c *Client) UpdateAccessRule(ar AccessRule) (*AccessRule, error) {
+func (c *Client) UpdateAccessRule(apId string, ar AccessRule) (*AccessRule, error) {
 	ar.Type = "accessrule"
-	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s", ar.ID), "PUT", c)
+	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s/accessrules/%s", apId, ar.ID), "PUT", c)
 	return &ar, err
 }
 
-func (c *Client) DeleteAccessRule(ar AccessRule) (*AccessRule, error) {
+func (c *Client) DeleteAccessRule(apId string, ar AccessRule) (*AccessRule, error) {
 	ar.Type = "accessrule"
-	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s", ar.ID), "DELETE", c)
+	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s/accessrules/%s", apId, ar.ID), "DELETE", c)
 	return &ar, err
 }
