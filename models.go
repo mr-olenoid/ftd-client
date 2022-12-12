@@ -45,9 +45,31 @@ type Items[T ItemTypes] struct {
 
 // add all fields later
 type AccessPolicy struct {
-	ID      string `json:"id"`
-	Version string `json:"version,omitempty"`
-	Name    string `json:"name,omitempty"`
+	ID                    string              `json:"id"`
+	Version               string              `json:"version,omitempty"`
+	Name                  string              `json:"name,omitempty"`
+	DefaultAction         AccessDefaultAction `json:"defaultAction,omitempty"`
+	SslPolicy             ReferenceModel      `json:"sslPolicy,omitempty"`
+	CertVisibilityEnabled bool                `json:"certVisibilityEnabled,omitempty"`
+	NetworkAnalysisPolicy ReferenceModel      `json:"networkAnalysisPolicy,omitempty"`
+	AdvancedSettings      AdvancedSettings    `json:"advancedSettings,omitempty"`
+	IdentityPolicySetting ReferenceModel      `json:"identityPolicySetting,omitempty"`
+	SecurityIntelligence  ReferenceModel      `json:"securityIntelligence,omitempty"`
+	Type                  string              `json:"type"` //accesspolicy
+}
+
+type AdvancedSettings struct {
+	DnsReputationEnforcementEnabled bool   `json:"dnsReputationEnforcementEnabled,omitempty"`
+	Type                            string `json:"type"` //advancedsettings
+}
+
+type AccessDefaultAction struct {
+	Action          string         `json:"action,omitempty"`         // ['PERMIT', 'TRUST', 'DENY']
+	EventLogAction  string         `json:"eventLogAction,omitempty"` //[ 'LOG_FLOW_END', 'LOG_BOTH', 'LOG_NONE']
+	IntrusionPolicy ReferenceModel `json:"intrusionPolicy,omitempty"`
+	SyslogServer    ReferenceModel `json:"syslogServer,omitempty"`
+	//hitCount
+	Type string `json:"type"` //accessdefaultaction
 }
 
 type AccessRule struct {
