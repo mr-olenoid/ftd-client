@@ -28,10 +28,10 @@ type NetworkObject struct {
 }
 
 type ReferenceModel struct {
-	ID      string `json:"id"`
+	ID      string `json:"id,omitempty"`
 	Version string `json:"version,omitempty"`
 	Name    string `json:"name,omitempty"`
-	Type    string `json:"type"`
+	Type    string `json:"type,omitempty"`
 }
 
 type ItemTypes interface {
@@ -51,33 +51,33 @@ type AccessPolicy struct {
 }
 
 type AccessRule struct {
-	ID                        string             `json:"id,omitempty"`
-	RuleID                    int                `json:"ruleId,omitempty"`
-	Version                   string             `json:"version,omitempty"`
-	Name                      string             `json:"name"`
-	Description               string             `json:"description,omitempty"`
-	SourceZones               []ReferenceModel   `json:"sourceZones,omitempty"`
-	DestinationZones          []ReferenceModel   `json:"destinationZones,omitempty"`
-	SourceNetworks            []ReferenceModel   `json:"sourceNetworks,omitempty"`
-	DestinationNetworks       []ReferenceModel   `json:"destinationNetworks,omitempty"`
-	SourcePorts               []ReferenceModel   `json:"sourcePorts,omitempty"`
-	DestinationPorts          []ReferenceModel   `json:"destinationPorts,omitempty"`
-	RulePosition              int                `json:"rulePosition,omitempty"`
-	RuleAction                string             `json:"ruleAction"`
-	EventLogAction            string             `json:"eventLogAction,omitempty"` //['LOG_FLOW_START', 'LOG_FLOW_END', 'LOG_BOTH', 'LOG_NONE']
-	IdentitySources           []ReferenceModel   `json:"identitySources,omitempty"`
-	Users                     []TrafficEntry     `json:"users,omitempty"`
-	EmbeddedAppFilter         *EmbeddedAppFilter `json:"embeddedAppFilter,omitempty"`
-	UrlFilter                 *EmbeddedURLFilter `json:"urlFilter,omitempty"`
-	IntrusionPolicy           *ReferenceModel    `json:"intrusionPolicy,omitempty"`
-	FilePolicy                *ReferenceModel    `json:"filePolicy,omitempty"`
-	LogFiles                  bool               `json:"logFiles,omitempty"`
-	SyslogServer              *ReferenceModel    `json:"syslogServer,omitempty"`
-	HitCount                  bool               `json:"hitCount,omitempty"`
-	DestinationDynamicObjects []ReferenceModel   `json:"destinationDynamicObjects,omitempty"`
-	SourceDynamicObjects      []ReferenceModel   `json:"sourceDynamicObjects,omitempty"`
-	TimeRangeObjects          []ReferenceModel   `json:"timeRangeObjects,omitempty"`
-	Type                      string             `json:"type"` //accessrule
+	ID                        string            `json:"id,omitempty"`
+	RuleID                    int               `json:"ruleId,omitempty"`
+	Version                   string            `json:"version,omitempty"`
+	Name                      string            `json:"name"`
+	Description               string            `json:"description,omitempty"`
+	SourceZones               []ReferenceModel  `json:"sourceZones,omitempty"`
+	DestinationZones          []ReferenceModel  `json:"destinationZones,omitempty"`
+	SourceNetworks            []ReferenceModel  `json:"sourceNetworks,omitempty"`
+	DestinationNetworks       []ReferenceModel  `json:"destinationNetworks,omitempty"`
+	SourcePorts               []ReferenceModel  `json:"sourcePorts,omitempty"`
+	DestinationPorts          []ReferenceModel  `json:"destinationPorts,omitempty"`
+	RulePosition              int               `json:"rulePosition,omitempty"`
+	RuleAction                string            `json:"ruleAction"`
+	EventLogAction            string            `json:"eventLogAction,omitempty"` //['LOG_FLOW_START', 'LOG_FLOW_END', 'LOG_BOTH', 'LOG_NONE']
+	IdentitySources           []ReferenceModel  `json:"identitySources,omitempty"`
+	Users                     []TrafficEntry    `json:"users,omitempty"`
+	EmbeddedAppFilter         EmbeddedAppFilter `json:"embeddedAppFilter,omitempty"`
+	UrlFilter                 EmbeddedURLFilter `json:"urlFilter,omitempty"`
+	IntrusionPolicy           ReferenceModel    `json:"intrusionPolicy,omitempty"`
+	FilePolicy                ReferenceModel    `json:"filePolicy,omitempty"`
+	LogFiles                  bool              `json:"logFiles,omitempty"`
+	SyslogServer              ReferenceModel    `json:"syslogServer,omitempty"`
+	HitCount                  bool              `json:"hitCount,omitempty"`
+	DestinationDynamicObjects []ReferenceModel  `json:"destinationDynamicObjects,omitempty"`
+	SourceDynamicObjects      []ReferenceModel  `json:"sourceDynamicObjects,omitempty"`
+	TimeRangeObjects          []ReferenceModel  `json:"timeRangeObjects,omitempty"`
+	Type                      string            `json:"type"` //accessrule
 }
 
 type TrafficEntry struct {
@@ -90,13 +90,13 @@ type EmbeddedAppFilter struct {
 	Applications       []ReferenceModel             `json:"applications,omitempty"`
 	ApplicationFilters []ReferenceModel             `json:"applicationFilters,omitempty"`
 	Conditions         []ApplicationFilterCondition `json:"ApplicationFilterCondition,omitempty"`
-	Type               string                       `json:"type"` //embeddedappfilter
+	Type               string                       `json:"type,omitempty"` //embeddedappfilter
 }
 
 type EmbeddedURLFilter struct {
 	UrlObjects    []ReferenceModel     `json:"urlObjects,omitempty"`
 	UrlCategories []URLCategoryMatcher `json:"urlCategories,omitempty"`
-	Type          string               `json:"type"` //embeddedurlfilter
+	Type          string               `json:"type,omitempty"` //embeddedurlfilter
 }
 
 type URLCategoryMatcher struct {
