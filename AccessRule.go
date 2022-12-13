@@ -21,8 +21,8 @@ func (c *Client) UpdateAccessRule(apId string, ar AccessRule) (*AccessRule, erro
 	return &ar, err
 }
 
-func (c *Client) DeleteAccessRule(apId string, ar AccessRule) (*AccessRule, error) {
+func (c *Client) DeleteAccessRule(apId string, ar AccessRule) error {
 	ar.Type = "accessrule"
 	err := doFTDRequest(&ar, fmt.Sprintf("policy/accesspolicies/%s/accessrules/%s", apId, ar.ID), "DELETE", c)
-	return &ar, err
+	return err
 }
