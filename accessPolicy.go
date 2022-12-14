@@ -14,3 +14,11 @@ func (c *Client) UpdateAccessPolicy(ap AccessPolicy) (*AccessPolicy, error) {
 	err := doFTDRequest(&ap, fmt.Sprintf("policy/accesspolicies/%s", ap.ID), "PUT", c)
 	return &ap, err
 }
+
+func (c *Client) CreateAccessPolicy(name string) (*AccessPolicy, error) {
+	ap := AccessPolicy{
+		Type: "accesspolicy",
+	}
+	err := doFTDRequest(&ap, fmt.Sprintf("policy/accesspolicies?filter=name:%s", name), "GET", c)
+	return &ap, err
+}
