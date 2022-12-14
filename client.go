@@ -118,7 +118,7 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	for i := 1; i < 3; i++ {
 		rb = []byte(mustc.ReplaceAllString(string(rb), ""))
 	}
-	//fmt.Println(string(rb))
+	fmt.Println(string(rb))
 
 	req, err := http.NewRequest(method, URL, strings.NewReader(string(rb)))
 	if err != nil {
