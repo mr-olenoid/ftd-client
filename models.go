@@ -202,3 +202,44 @@ type HAIPv4Address struct {
 	StandbyIpAddress string `json:"standbyIpAddress,omitempty"`
 	Type             string `json:"type,omitempty"` //haipv4address
 }
+
+type TcpUdpPort struct {
+	Version         string `json:"version,omitempty"`
+	Name            string `json:"name,omitempty"`
+	Description     bool   `json:"description,omitempty"`
+	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
+	Port            string `json:"port,omitempty"`
+	ID              string `json:"id,omitempty"`
+	Type            string `json:"type,omitempty"` //tcpportobject or udpportobject
+}
+
+type Protocol struct {
+	Version         string `json:"version,omitempty"`
+	Name            string `json:"name,omitempty"`
+	Description     bool   `json:"description,omitempty"`
+	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
+	Protocol        string `json:"protocol,omitempty"`
+	ID              string `json:"id,omitempty"`
+	Type            string `json:"type,omitempty"` //protocolobject
+}
+
+type Icmpv4port struct {
+	Version         string `json:"version,omitempty"`
+	Name            string `json:"name,omitempty"`
+	Description     bool   `json:"description,omitempty"`
+	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
+	Icmpv4Type      string `json:"icmpv4Type,omitempty"`
+	Icmpv4Code      string `json:"icmpv4Code,omitempty"`
+	ID              string `json:"id,omitempty"`
+	Type            string `json:"type,omitempty"` //icmpv4portobject
+}
+
+type PortGroup struct {
+	Version         string         `json:"version,omitempty"`
+	Name            string         `json:"name,omitempty"`
+	Description     bool           `json:"description,omitempty"`
+	IsSystemDefined bool           `json:"isSystemDefined,omitempty"`
+	ID              string         `json:"id,omitempty"`
+	Objects         ReferenceModel `json:"objects,omitempty"`
+	Type            string         `json:"type,omitempty"` //portobjectgroup
+}

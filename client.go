@@ -98,7 +98,7 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 		return nil, err
 	}
 
-	if res.StatusCode != http.StatusOK && (res.StatusCode != http.StatusNoContent && req.Method != "DELETE") {
+	if res.StatusCode != http.StatusOK && res.StatusCode != http.StatusNoContent {
 		return nil, fmt.Errorf("status: %d, body: %s", res.StatusCode, body)
 	}
 
@@ -132,7 +132,7 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 
 	//fmt.Println(string(body)) //for debug usage
 	// Cisco FTD does not return data on delete
-	if method != "DELETE" {
+	if len(body) > 0 {
 		err = json.Unmarshal(body, m)
 		if err != nil {
 			return err
