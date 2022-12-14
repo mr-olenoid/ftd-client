@@ -60,7 +60,7 @@ type AccessPolicy struct {
 
 type AdvancedSettings struct {
 	DnsReputationEnforcementEnabled bool   `json:"dnsReputationEnforcementEnabled,omitempty"`
-	Type                            string `json:"type"` //advancedsettings
+	Type                            string `json:"type,omitempty"` //advancedsettings
 }
 
 type AccessDefaultAction struct {
