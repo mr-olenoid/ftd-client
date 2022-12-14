@@ -113,10 +113,11 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	if err != nil {
 		return err
 	}
-	//remove empty structs from marshalled json
+	//remove empty structs from marshalled json. Need other json marshaler to remove empty (default values) struct
 	mustc := regexp.MustCompile(`,"([a-zA-Z])*":{}`)
-	//fmt.Println(mustc.ReplaceAllString(string(rb), ""))
-	rb = []byte(mustc.ReplaceAllString(string(rb), ""))
+	for i := 1; i < 3; i++ {
+		rb = []byte(mustc.ReplaceAllString(string(rb), ""))
+	}
 	//fmt.Println(string(rb))
 
 	req, err := http.NewRequest(method, URL, strings.NewReader(string(rb)))
