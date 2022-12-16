@@ -213,7 +213,7 @@ type TcpUdpPort struct {
 	Type            string `json:"type,omitempty"` //tcpportobject or udpportobject
 }
 
-type Protocol struct {
+type ProtocolObject struct {
 	Version         string `json:"version,omitempty"`
 	Name            string `json:"name,omitempty"`
 	Description     bool   `json:"description,omitempty"`
