@@ -6,7 +6,6 @@ func (c *Client) GetIcmp4port(ID string) (*Icmpv4port, error) {
 
 	var icmpv4port Icmpv4port
 	err := doFTDRequest(&icmpv4port, fmt.Sprintf("object/icmpv4ports/%s", ID), "GET", c)
-
 	return &icmpv4port, err
 }
 
