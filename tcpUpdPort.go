@@ -16,3 +16,47 @@ func (c *Client) GetTcpUdpPort(ID string, portType string) (*TcpUdpPort, error) 
 
 	return &tcpUdpPort, err
 }
+
+func (c *Client) CreateTcpUdpPort(tcpUpdPort TcpUdpPort, portType string) (*TcpUdpPort, error) {
+	var tcpUdpPort TcpUdpPort
+	var err error
+	switch portType {
+	case "TCP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/tcpports/%s", tcpUdpPort.ID), "POST", c)
+	case "UDP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports/%s", tcpUdpPort.ID), "POST", c)
+	default:
+		err = fmt.Errorf("expect TCP or UDP, got: %s", portType)
+	}
+
+	return &tcpUdpPort, err
+}
+
+func (c *Client) UpdateTcpUdpPort(tcpUpdPort TcpUdpPort, portType string) (*TcpUdpPort, error) {
+	var tcpUdpPort TcpUdpPort
+	var err error
+	switch portType {
+	case "TCP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/tcpports/%s", tcpUdpPort.ID), "PUT", c)
+	case "UDP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports/%s", tcpUdpPort.ID), "PUT", c)
+	default:
+		err = fmt.Errorf("expect TCP or UDP, got: %s", portType)
+	}
+
+	return &tcpUdpPort, err
+}
+
+func (c *Client) DeleteTcpUdpPort(tcpUdpPort *TcpUdpPort, portType string) error {
+	var err error
+	switch portType {
+	case "TCP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/tcpports/%s", tcpUdpPort.ID), "DELETE", c)
+	case "UDP":
+		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports/%s", tcpUdpPort.ID), "DELETE", c)
+	default:
+		err = fmt.Errorf("expect TCP or UDP, got: %s", portType)
+	}
+
+	return err
+}
