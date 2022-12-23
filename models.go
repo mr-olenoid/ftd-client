@@ -206,7 +206,7 @@ type HAIPv4Address struct {
 type TcpUdpPort struct {
 	Version         string `json:"version,omitempty"`
 	Name            string `json:"name,omitempty"`
-	Description     bool   `json:"description,omitempty"`
+	Description     string `json:"description,omitempty"`
 	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
 	Port            string `json:"port,omitempty"`
 	ID              string `json:"id,omitempty"`
@@ -216,7 +216,7 @@ type TcpUdpPort struct {
 type ProtocolObject struct {
 	Version         string `json:"version,omitempty"`
 	Name            string `json:"name,omitempty"`
-	Description     bool   `json:"description,omitempty"`
+	Description     string `json:"description,omitempty"`
 	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
 	Protocol        string `json:"protocol,omitempty"`
 	ID              string `json:"id,omitempty"`
@@ -226,7 +226,7 @@ type ProtocolObject struct {
 type Icmpv4port struct {
 	Version         string `json:"version,omitempty"`
 	Name            string `json:"name,omitempty"`
-	Description     bool   `json:"description,omitempty"`
+	Description     string `json:"description,omitempty"`
 	IsSystemDefined bool   `json:"isSystemDefined,omitempty"`
 	Icmpv4Type      string `json:"icmpv4Type,omitempty"`
 	Icmpv4Code      string `json:"icmpv4Code,omitempty"`
@@ -237,7 +237,7 @@ type Icmpv4port struct {
 type PortGroup struct {
 	Version         string         `json:"version,omitempty"`
 	Name            string         `json:"name,omitempty"`
-	Description     bool           `json:"description,omitempty"`
+	Description     string         `json:"description,omitempty"`
 	IsSystemDefined bool           `json:"isSystemDefined,omitempty"`
 	ID              string         `json:"id,omitempty"`
 	Objects         ReferenceModel `json:"objects,omitempty"`
