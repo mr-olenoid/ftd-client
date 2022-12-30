@@ -35,12 +35,18 @@ type ReferenceModel struct {
 }
 
 type ItemTypes interface {
-	SecurityZone | AccessPolicy | NetworkInterface | TcpUdpPort
+	SecurityZone | AccessPolicy | NetworkInterface | TcpUdpPort | Application
 }
 
 // List return wraper
 type Items[T ItemTypes] struct {
-	Items []T `json:"items"`
+	Items  []T    `json:"items"`
+	Paging Paging `json:"paging"`
+}
+
+type Paging struct {
+	Prev []string `json:"prev"`
+	Next []string `json:"next"`
 }
 
 // add all fields later
@@ -242,4 +248,20 @@ type PortGroup struct {
 	ID              string         `json:"id,omitempty"`
 	Objects         ReferenceModel `json:"objects,omitempty"`
 	Type            string         `json:"type,omitempty"` //portobjectgroup
+}
+
+type Application struct {
+	Name             string         `json:"name,omitempty"`
+	AppId            int            `json:"appId,omitempty"`
+	Description      string         `json:"description,omitempty"`
+	Tags             ReferenceModel `json:"tags,omitempty"`
+	Categories       ReferenceModel `json:"categories,omitempty"`
+	Deprecated       bool           `json:"deprecated,omitempty"`
+	TagIds           []int          `json:"tagIds,omitempty"`
+	CategoryIds      []int          `json:"categoryIds,omitempty"`
+	ID               string         `json:"id,omitempty"`
+	ApplicationTypes []string       `json:"applicationTypes,omitempty"`
+	Productivity     int            `json:"productivity,omitempty"`
+	Risk             int            `json:"risk,omitempty"`
+	Type             string         `json:"type,omitempty"` //application
 }
