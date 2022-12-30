@@ -11,7 +11,7 @@ func (c *Client) GetTcpUdpPort(ID string, portType string) (*TcpUdpPort, error) 
 	case "udpportobject":
 		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports/%s", ID), "GET", c)
 	default:
-		err = fmt.Errorf("expect TCP or UDP, got: %s", portType)
+		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", portType)
 	}
 
 	return &tcpUdpPort, err
@@ -25,7 +25,7 @@ func (c *Client) CreateTcpUdpPort(tcpUdpPort TcpUdpPort) (*TcpUdpPort, error) {
 	case "udpportobject":
 		err = doFTDRequest(&tcpUdpPort, "object/udpports", "POST", c)
 	default:
-		err = fmt.Errorf("expect TCP or UDP, got: %s", tcpUdpPort.Type)
+		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", tcpUdpPort.Type)
 	}
 
 	return &tcpUdpPort, err
@@ -39,7 +39,7 @@ func (c *Client) UpdateTcpUdpPort(tcpUdpPort TcpUdpPort) (*TcpUdpPort, error) {
 	case "udpportobject":
 		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports/%s", tcpUdpPort.ID), "PUT", c)
 	default:
-		err = fmt.Errorf("expect TCP or UDP, got: %s", tcpUdpPort.Type)
+		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", tcpUdpPort.Type)
 	}
 
 	return &tcpUdpPort, err
