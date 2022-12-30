@@ -18,16 +18,18 @@ func (c *Client) GetTcpUdpPort(ID string, portType string) (*TcpUdpPort, error) 
 }
 
 func (c *Client) GetTcpUdpPortByName(name string, portType string) (*TcpUdpPort, error) {
-	var tcpUdpPort TcpUdpPort
+	tcpUdpPorts := Items[TcpUdpPort]{}
 	var err error
 	switch portType {
 	case "tcpportobject":
-		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/tcpports?filter=name:%s", name), "GET", c)
+		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/tcpports?filter=name:%s", name), "GET", c)
 	case "udpportobject":
-		err = doFTDRequest(&tcpUdpPort, fmt.Sprintf("object/udpports?filter=name:%s", name), "GET", c)
+		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/udpports?filter=name:%s", name), "GET", c)
 	default:
 		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", portType)
 	}
+
+	tcpUdpPort := tcpUdpPorts.Items[0]
 
 	return &tcpUdpPort, err
 }

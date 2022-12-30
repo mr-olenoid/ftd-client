@@ -35,7 +35,7 @@ type ReferenceModel struct {
 }
 
 type ItemTypes interface {
-	SecurityZone | AccessPolicy | NetworkInterface
+	SecurityZone | AccessPolicy | NetworkInterface | TcpUdpPort
 }
 
 // List return wraper

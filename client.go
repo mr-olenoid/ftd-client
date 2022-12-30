@@ -108,11 +108,15 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 // func doFTDRequest[T FtdModel](m *T, name string, method string, c *Client) error {
 func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	URL := fmt.Sprintf("%s/api/fdm/v6/%s", c.FTDURL, name)
-	//fmt.Printf("Method: %s %s \n", method, URL)
+
+	fmt.Printf("Method: %s %s \n", method, URL) //for debug usage
+
 	rb, err := json.Marshal(m)
 	if err != nil {
 		return err
 	}
+
+	//fmt.Println(string(rb))
 	//remove empty structs from marshalled json. Need other json marshaler to remove empty (default values) struct
 	mustc := regexp.MustCompile(`(,?)"([a-zA-Z0-9])*":{}`)
 	for i := 0; i < 3; i++ {
@@ -130,7 +134,7 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 		return err
 	}
 
-	//fmt.Println(string(body)) //for debug usage
+	fmt.Println(string(body)) //for debug usage
 	// Cisco FTD does not return data on delete
 	if len(body) > 0 {
 		err = json.Unmarshal(body, m)
