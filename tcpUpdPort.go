@@ -29,7 +29,10 @@ func (c *Client) GetTcpUdpPortByName(name string, portType string) (*TcpUdpPort,
 		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", portType)
 	}
 
-	tcpUdpPort := tcpUdpPorts.Items[0]
+	var tcpUdpPort TcpUdpPort
+	if len(tcpUdpPorts.Items) > 0 {
+		tcpUdpPort = tcpUdpPorts.Items[0]
+	}
 
 	return &tcpUdpPort, err
 }
