@@ -1,6 +1,9 @@
 package ftdClient
 
-import "fmt"
+import (
+	"fmt"
+	"net/url"
+)
 
 func (c *Client) GetTcpUdpPort(ID string, portType string) (*TcpUdpPort, error) {
 	var tcpUdpPort TcpUdpPort
@@ -22,9 +25,9 @@ func (c *Client) GetTcpUdpPortByName(name string, portType string) (*TcpUdpPort,
 	var err error
 	switch portType {
 	case "tcpportobject":
-		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/tcpports?filter=name:%s", name), "GET", c)
+		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/tcpports?filter=name:%s", url.QueryEscape(name)), "GET", c)
 	case "udpportobject":
-		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/udpports?filter=name:%s", name), "GET", c)
+		err = doFTDRequest(&tcpUdpPorts, fmt.Sprintf("object/udpports?filter=name:%s", url.QueryEscape(name)), "GET", c)
 	default:
 		err = fmt.Errorf("expect tcpportobject or udpportobject, got: %s", portType)
 	}

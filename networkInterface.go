@@ -2,6 +2,7 @@ package ftdClient
 
 import (
 	"fmt"
+	"net/url"
 )
 
 func (c *Client) GetNetworkInterface(ID string) (*NetworkInterface, error) {
@@ -31,7 +32,7 @@ func (c *Client) GetNetworkInterfaceSecurityZone(interfaceID string) (*Reference
 func (c *Client) CreateNetworkInterface(name string) (*NetworkInterface, error) {
 	i := Items[NetworkInterface]{}
 	//sz := &ReferenceModel{}
-	err := doFTDRequest(&i, fmt.Sprintf("/devices/default/interfaces?filter=name:%s", name), "GET", c)
+	err := doFTDRequest(&i, fmt.Sprintf("/devices/default/interfaces?filter=name:%s", url.QueryEscape(name)), "GET", c)
 	if err != nil {
 		return nil, err
 	}

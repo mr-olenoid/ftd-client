@@ -2,6 +2,7 @@ package ftdClient
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func (c *Client) GetApplication(name string) (*[]Application, error) {
 			apps = append(apps, applications.Items...)
 		}
 	} else {
-		err = doFTDRequest(&applications, fmt.Sprintf("object/applications?filter=name:%s", name), "GET", c)
+		err = doFTDRequest(&applications, fmt.Sprintf("object/applications?filter=name:%s", url.QueryEscape(name)), "GET", c)
 		apps = applications.Items
 	}
 
@@ -27,7 +28,7 @@ func (c *Client) GetApplication(name string) (*[]Application, error) {
 
 func (c *Client) GetApplicationCategory(name string) (*ApplicationCategory, error) {
 	applicationcategories := Items[ApplicationCategory]{}
-	err := doFTDRequest(&applicationcategories, fmt.Sprintf("object/applicationcategories?filter=name:%s", name), "GET", c)
+	err := doFTDRequest(&applicationcategories, fmt.Sprintf("object/applicationcategories?filter=name:%s", url.QueryEscape(name)), "GET", c)
 	if len(applicationcategories.Items) == 1 {
 		appCategory := applicationcategories.Items[0]
 		return &appCategory, err
