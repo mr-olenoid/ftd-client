@@ -131,7 +131,7 @@ type URLCategoryMatcher struct {
 	UrlCategory                 ReferenceModel `json:"urlCategory"`
 	UrlReputation               ReferenceModel `json:"urlReputation"`
 	IncludeUnknownUrlReputation bool           `json:"includeUnknownUrlReputation,omitempty"`
-	Type                        string         `json:"type"` //urlcategorymatcher
+	Type                        string         `json:"type,omitempty"` //urlcategorymatcher
 }
 
 type ApplicationFilterCondition struct {
@@ -141,22 +141,22 @@ type ApplicationFilterCondition struct {
 	Categories       []ReferenceModel        `json:"categories,omitempty"`
 	Filter           string                  `json:"filter,omitempty"`
 	ApplicationTypes []TypeCondition         `json:"applicationTypes,omitempty"`
-	Type             string                  `json:"type"` //applicationfiltercondition
+	Type             string                  `json:"type,omitempty"` //applicationfiltercondition
 }
 
 type RiskCondition struct {
 	Risk string `json:"risk,omitempty"` // ['UNKNOWN', 'VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL'],
-	Type string `json:"type"`           //riskcondition
+	Type string `json:"type,omitempty"` //riskcondition
 }
 
 type ProductivityCondition struct {
 	Productivity string `json:"productivity,omitempty"`
-	Type         string `json:"type"` //productivitycondition
+	Type         string `json:"type,omitempty"` //productivitycondition
 }
 
 type TypeCondition struct {
 	ApplicationType string `json:"applicationType,omitempty"`
-	Type            string `json:"type"` //typecondition
+	Type            string `json:"type,omitempty"` //typecondition
 }
 
 type NetworkInterface struct {
