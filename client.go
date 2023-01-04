@@ -109,7 +109,7 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	URL := fmt.Sprintf("%s/api/fdm/v6/%s", c.FTDURL, name)
 
-	fmt.Printf("Method: %s %s \n", method, URL) //for debug usage
+	//fmt.Printf("Method: %s %s \n", method, URL) //for debug usage
 
 	rb, err := json.Marshal(m)
 	if err != nil {
@@ -122,7 +122,7 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	for i := 0; i < 3; i++ {
 		rb = []byte(mustc.ReplaceAllString(string(rb), ""))
 	}
-	fmt.Println(string(rb))
+	//fmt.Println(string(rb))
 
 	req, err := http.NewRequest(method, URL, strings.NewReader(string(rb)))
 	if err != nil {
@@ -134,7 +134,7 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 		return err
 	}
 
-	fmt.Println(string(body)) //for debug usage
+	//fmt.Println(string(body)) //for debug usage
 	// Cisco FTD does not return data on delete
 	if len(body) > 0 {
 		err = json.Unmarshal(body, m)

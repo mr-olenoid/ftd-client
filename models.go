@@ -251,17 +251,17 @@ type PortGroup struct {
 }
 
 type Application struct {
-	Name             string         `json:"name,omitempty"`
-	AppId            int            `json:"appId,omitempty"`
-	Description      string         `json:"description,omitempty"`
-	Tags             ReferenceModel `json:"tags,omitempty"`
-	Categories       ReferenceModel `json:"categories,omitempty"`
-	Deprecated       bool           `json:"deprecated,omitempty"`
-	TagIds           []int          `json:"tagIds,omitempty"`
-	CategoryIds      []int          `json:"categoryIds,omitempty"`
-	ID               string         `json:"id,omitempty"`
-	ApplicationTypes []string       `json:"applicationTypes,omitempty"`
-	Productivity     int            `json:"productivity,omitempty"`
-	Risk             int            `json:"risk,omitempty"`
-	Type             string         `json:"type,omitempty"` //application
+	Name             string           `json:"name,omitempty"`
+	AppId            int              `json:"appId,omitempty"`
+	Description      string           `json:"description,omitempty"`
+	Tags             []ReferenceModel `json:"tags,omitempty"`
+	Categories       []ReferenceModel `json:"categories,omitempty"`
+	Deprecated       bool             `json:"deprecated,omitempty"`
+	TagIds           []int            `json:"tagIds,omitempty"`
+	CategoryIds      []int            `json:"categoryIds,omitempty"`
+	ID               string           `json:"id,omitempty"`
+	ApplicationTypes []string         `json:"applicationTypes,omitempty"`
+	Productivity     int              `json:"productivity,omitempty"`
+	Risk             int              `json:"risk,omitempty"`
+	Type             string           `json:"type,omitempty"` //application
 }
