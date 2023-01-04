@@ -24,3 +24,13 @@ func (c *Client) GetApplication(name string) (*[]Application, error) {
 
 	return &apps, err
 }
+
+func (c *Client) GetApplicationCategory(name string) (*ApplicationCategory, error) {
+	applicationcategories := Items[ApplicationCategory]{}
+	err := doFTDRequest(&applicationcategories, fmt.Sprintf("object/applicationcategories?filter=name:%s", name), "GET", c)
+	if len(applicationcategories.Items) == 1 {
+		appCategory := applicationcategories.Items[0]
+		return &appCategory, err
+	}
+	return nil, err
+}

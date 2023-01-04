@@ -35,7 +35,7 @@ type ReferenceModel struct {
 }
 
 type ItemTypes interface {
-	SecurityZone | AccessPolicy | NetworkInterface | TcpUdpPort | Application
+	SecurityZone | AccessPolicy | NetworkInterface | TcpUdpPort | Application | ApplicationCategory
 }
 
 // List return wraper
@@ -274,4 +274,13 @@ type ApplicationFilter struct {
 	IsSystemDefined bool                         `json:"isSystemDefined,omitempty"`
 	Conditions      []ApplicationFilterCondition `json:"conditions,omitempty"`
 	Type            string                       `json:"type,omitempty"` //applicationfilter
+}
+
+type ApplicationCategory struct {
+	Name        string `json:"name,omitempty"`
+	ID          string `json:"id,omitempty"`
+	Version     string `json:"version,omitempty"`
+	AppId       int    `json:"appId,omitempty"`
+	Description string `json:"description,omitempty"`
+	Type        string `json:"type,omitempty"` //applicationcategory
 }
