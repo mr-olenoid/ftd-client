@@ -117,7 +117,7 @@ type TrafficEntry struct {
 type EmbeddedAppFilter struct {
 	Applications       []ReferenceModel             `json:"applications,omitempty"`
 	ApplicationFilters []ReferenceModel             `json:"applicationFilters,omitempty"`
-	Conditions         []ApplicationFilterCondition `json:"ApplicationFilterCondition,omitempty"`
+	Conditions         []ApplicationFilterCondition `json:"condition,omitempty"`
 	Type               string                       `json:"type,omitempty"` //embeddedappfilter
 }
 
@@ -264,4 +264,14 @@ type Application struct {
 	Productivity     int              `json:"productivity,omitempty"`
 	Risk             int              `json:"risk,omitempty"`
 	Type             string           `json:"type,omitempty"` //application
+}
+
+type ApplicationFilter struct {
+	Name            string                       `json:"name,omitempty"`
+	ID              string                       `json:"id,omitempty"`
+	Version         string                       `json:"version,omitempty"`
+	Applications    []ReferenceModel             `json:"applications,omitempty"`
+	IsSystemDefined bool                         `json:"isSystemDefined,omitempty"`
+	Conditions      []ApplicationFilterCondition `json:"conditions,omitempty"`
+	Type            string                       `json:"type,omitempty"` //applicationfilter
 }
