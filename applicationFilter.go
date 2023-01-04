@@ -18,7 +18,7 @@ func (c *Client) UpdateApplicationFilter(af ApplicationFilter) (*ApplicationFilt
 	return &af, err
 }
 
-func (c *Client) DeleteApplicationFilter(af ApplicationFilter) (*ApplicationFilter, error) {
+func (c *Client) DeleteApplicationFilter(af ApplicationFilter) error {
 	err := doFTDRequest(&af, fmt.Sprintf("object/applicationfilters/%s", af.ID), "DELETE", c)
-	return &af, err
+	return err
 }
