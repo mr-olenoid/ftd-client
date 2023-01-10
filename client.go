@@ -122,7 +122,10 @@ func doFTDRequest[T any](m *T, name string, method string, c *Client) error {
 	for i := 0; i < 3; i++ {
 		rb = []byte(mustc.ReplaceAllString(string(rb), ""))
 	}
-	//fmt.Println(string(rb))
+
+	fmt.Println("---request json data---")
+	fmt.Println(string(rb))
+	fmt.Println("---request json data---")
 
 	req, err := http.NewRequest(method, URL, strings.NewReader(string(rb)))
 	if err != nil {
