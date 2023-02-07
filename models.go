@@ -284,3 +284,20 @@ type ApplicationCategory struct {
 	Description string `json:"description,omitempty"`
 	Type        string `json:"type,omitempty"` //applicationcategory
 }
+
+type SamlServer struct {
+	Version                 string         `json:"version,omitempty"`
+	Name                    string         `json:"name,omitempty"`
+	Description             string         `json:"description,omitempty"`
+	SamlIssuerURL           string         `json:"samlIssuerURL,omitempty"`
+	SignInURL               string         `json:"signInURL,omitempty"`
+	SignOutURL              string         `json:"signOutURL,omitempty"`
+	SamlIssuerCert          ReferenceModel `json:"samlIssuerCert,omitempty"`
+	FtdCert                 ReferenceModel `json:"ftdCert,omitempty"`
+	RequestTimeout          int            `json:"requestTimeout,omitempty"`
+	ServerOnInternalNetwork bool           `json:"serverOnInternalNetwork,omitempty"`
+	ReAuthAtLogin           bool           `json:"reAuthAtLogin,omitempty"`
+	SignatureType           string         `json:"signatureType,omitempty"`
+	ID                      string         `json:"id,omitempty"`
+	Type                    string         `json:"type,omitempty"` //samlserver
+}
